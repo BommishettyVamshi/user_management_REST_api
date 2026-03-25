@@ -75,7 +75,7 @@ Follow the steps below to run the project locally
 - To seed the database with initial data:
 
 ```bash
-    npm run sedd
+    npm run seed
 ```
 
 # Notes
