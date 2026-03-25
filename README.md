@@ -2,83 +2,227 @@
 
 ## Overview
 
-This project is a backend-only REST API for user management, built using Node.js and Express.js. It is designed to support CRUD (Create, Read, Update, Delete) operations and follows a clean, scalable architecture using controllers, services, and models.
+This project is a backend-only REST API for user management, built using **Node.js** and **Express.js**. It supports CRUD (Create, Read, Update, Delete) operations and follows a clean, scalable architecture using **controllers, services, and models**.
 
-The project is currently in the initial setup phase, with core structure and dependencies in place. Database integration and API implementation will be added in subsequent stages.
+---
 
-# Tech Stack
+## Tech Stack
 
-- Node.js
-- Express.js
-- Sqlite
+* Node.js
+* Express.js
+* SQLite
 
-## 📁 Project Structure
+---
+
+## Project Structure
 
 ```text
 user_management_REST_API/
 │── backend/
 │   │── src/
-│   │   │── controllers/   # Handles request and response
-│   │   │── database/      # Database config and schema
-│   │   │   │── db.js      # Initializes SQLite DB and exports connection
-│   │   │── models/        # Database queries
-│   │   │── routes/        # API route definitions
-│   │   │── services/      # Business logic
+│   │   │── controllers/
+|   |   |   |-- userController.js   # Handles the request and response 
+│   │   │── database/
+│   │   │   │── db.js               # Handles Database config
+│   │   │── models/
+|   |   |   |-- userModel.js        # Handles DB queries of user table
+│   │   │── routes/
+|   |   |   |-- userRoutes.js       # Handles routes config of users
+│   │   │── services/
+|   |   |   |-- userService.js      # Handles business logic 
 │   │
 │   │── scripts/
-│   │   │── seed.js        # Seeds database with initial data
+│   │   │── seed.js                 # Seeds the Database 
 │   │
-│   │── server.js          # Entry point
+│   │── server.js                   # Entry point 
 │   │── package.json
 │   │── .gitignore
 │
 │── README.md
 ```
 
-# Setup Instructions
+---
 
-Follow the steps below to run the project locally
-
-### 1. Clone the repository
+## Setup Instructions
 
 ```bash
-    git clone <https://github.com/BommishettyVamshi/user_management_REST_api>
+git clone https://github.com/BommishettyVamshi/user_management_REST_api
+cd backend
+npm install
+npm run seed
+npm run dev
 ```
 
-### 2. Navigate to the project directory
+---
 
-```bash
-    cd backend
+## Server
+
+```
+http://localhost:5000
 ```
 
-### 3. Install dependencies
+---
 
-```bash
-    npm install
+## API Endpoints
+
+## Base URL
+
+```
+http://localhost:5000/api/users
 ```
 
-## 4. Seed the Database
+---
 
-```bash
-    npm run seed
+### Get All Users
+
+**GET** `/api/users`
+
+**Description:** Fetch all users
+
+**Response**
+
+```json
+{
+  "message": "Users fetched successfully",
+  "data": [
+    {
+      "username": "JOHN_DOE",
+      "email": "john.doe@example.com",
+      "first_name": "JOHN",
+      "last_name": "DOE",
+      "is_active": 1
+    }
+  ]
+}
 ```
 
-### 5. Run the development server
+---
 
-```bash
-    npm run dev
+### Filter Users
+
+**GET** `/api/users?search=j&sort=name&order=desc`
+
+**Description:** Filter users by search, sort, and order
+
+**Response**
+
+```json
+{
+  "message": "Users fetched successfully",
+  "data": [
+    {
+      "username": "JANE_SMITH",
+      "email": "jane.smith@example.com",
+      "first_name": "JANE",
+      "last_name": "SMITH",
+      "is_active": 1
+    }
+  ]
+}
 ```
 
-# Database
+---
 
-- Database is initialized atuomatically when the server starts.
-- To seed the database with initial data:
+### Create User
 
-```bash
-    npm run seed
+**POST** `/api/users`
+
+**Request**
+
+```json
+{
+  "username": "ram",
+  "email": "ram@gmail.com",
+  "password": "123",
+  "first_name": "ram charan",
+  "last_name": "Goud"
+}
 ```
 
-# Notes
+**Response**
 
-- The project is currently in the database development phase.
-- API endpoints will be implemented in the next phase.
+```json
+{
+  "message": "User created successfully",
+  "data": {
+    "id": 5
+  }
+}
+```
+
+---
+
+### Update User
+
+**PUT** `/api/users/{userId}`
+
+**Request**
+
+```json
+{
+  "password": "12345"
+}
+```
+
+**Response**
+
+```json
+{
+  "message": "User updated successfully",
+  "data": {
+    "id": 6,
+    "username": "RAM",
+    "email": "ram@gmail.com",
+    "first_name": "RAM CHARAN",
+    "last_name": "GOUD",
+    "is_active": 1
+  }
+}
+```
+
+---
+
+### Delete User
+
+**DELETE** `/api/users/{userId}`
+
+**Response**
+
+```json
+{
+  "message": "User deleted successfully"
+}
+```
+
+---
+
+## Error Handling
+
+| Status Code | Description           |
+| ----------- | --------------------- |
+| 400         | Bad Request           |
+| 404         | User not found        |
+| 409         | Duplicate user        |
+| 500         | Internal server error |
+
+---
+
+## Notes
+
+* Follows MVC architecture
+* Uses singleton pattern for DB connection
+* Designed for scalability
+
+---
+
+## Future Improvements
+
+* JWT Authentication
+* Role-Based Access Control (RBAC)
+* Input validation (Joi / Zod)
+
+---
+
+## Author
+
+**Vamshi**

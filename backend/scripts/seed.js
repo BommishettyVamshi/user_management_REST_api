@@ -38,7 +38,7 @@ const seedDatabase = async () => {
             await db.run(`
                 INSERT INTO users (username, email, password_hash, first_name, last_name, is_active)
                 VALUES (?, ?, ?, ?, ?, ?)
-            `, [user.username, user.email, user.password_hash, user.first_name, user.last_name, user.is_active]);
+            `, [user.username.toUpperCase(), user.email, user.password_hash, user.first_name.toUpperCase(), user.last_name.toUpperCase(), user.is_active]);
         }
     } catch (error) {
         console.error('Error seeding database:', error);
