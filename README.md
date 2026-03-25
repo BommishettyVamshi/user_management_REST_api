@@ -31,7 +31,7 @@ The project is currently in initial setup phase, with core structure and depende
    |   |
    |   |---.gitignore
    |   |---package.json
-   |   |---README.md
+   |---README.md
    |
 ```
 
@@ -40,7 +40,7 @@ FOllow the steps below to run the project locally
 
 ## 1. Clone the repository
 ```bash
-    git clone <https://github.com/BommishettyVamshi/user_management_REST_API>
+    git clone <https://github.com/BommishettyVamshi/user_management_REST_api>
 ```
 ## 2. Navigate to the project directory
 ```bash
